@@ -77,3 +77,8 @@ export const categories = [
     },
   ];
   
+
+  export const uploads = [
+    { name:"fruit",imageUrl: "https://res.cloudinary.com/demo/image/upload/sample.jpg" },
+    { name:"vegetables",imageUrl: "https://res.cloudinary.com/demo/image/upload/sample2.jpg" }
+];

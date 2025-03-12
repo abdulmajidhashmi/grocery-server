@@ -5,10 +5,14 @@ import { PORT } from "./src/config/config.js";
 import fastifySocketIO from "fastify-socket.io";
 import { registerRoutes } from "./src/routes/index.js";
 import { admin, buildAdminRouter } from './src/config/setup.js';
+import router from './src/routes/router.js';
+import express from "express";
+const app2= express();
 
 const start = async()=>{
     await connectDB(process.env.MONGO_URI);
     const app = fastify()
+    app2.use('/upload',router);
 
     app.register(fastifySocketIO,{
         cors:{
@@ -22,6 +26,11 @@ const start = async()=>{
     await registerRoutes(app)
 
     await buildAdminRouter(app);
+
+app2.listen((4020),()=>{
+
+    console.log("server runnig");
+})
 
     app.listen({port:PORT,host:'0.0.0.0'},(err,addr)=>{
         if(err){
